@@ -14,11 +14,13 @@ defmodule Challenge do
           emails :: [String.t()]
         ) :: [%{String.t() => non_neg_integer()}]
   def split(shopping_list, emails) do
-      Enum.reduce(shopping_list, 0, fn order, acc ->
-        total = order.quantity * order.init_price_in_cents
-        acc + total
-      end)
-      |> fair_division(emails)
+    unique_emails = Enum.uniq(emails)
+
+    Enum.reduce(shopping_list, 0, fn order, acc ->
+      total = order.quantity * order.init_price_in_cents
+      acc + total
+    end)
+    |> fair_division(unique_emails)
   end
 
   @spec fair_division(
