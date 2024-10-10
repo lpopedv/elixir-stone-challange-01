@@ -28,8 +28,18 @@ defmodule Challenge do
           emails :: [String.t()]
         ) :: [%{String.t() => non_neg_integer()}]
   defp fair_division(shopping_total, emails) do
-    share_per_person = div(shopping_total, length(emails))
-    Enum.map(emails, fn email -> %{email => share_per_person} end)
+    value_per_person = div(shopping_total, length(emails))
+    rest = rem(shopping_total, length(emails))
+
+    emails
+    |> Enum.with_index(fn email, idx ->
+      if idx < rest do
+        {email, value_per_person + 1}
+      else
+        {email, value_per_person}
+      end
+    end)
+    |> Map.new()
   end
 end
 
