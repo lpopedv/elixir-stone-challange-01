@@ -1,6 +1,6 @@
-defmodule Challange do
+defmodule Challenge do
   @moduledoc """
-  Módulo do desafio
+  Módulo do desafio Store Tech
   """
 
   @spec split(
@@ -61,4 +61,4 @@ emailsParam = [
   "jhonsister@doe.com"
 ]
 
-IO.inspect(Challange.split(shopping_list_param, emailsParam))
+IO.inspect(Challenge.split(shopping_list_param, emailsParam))
